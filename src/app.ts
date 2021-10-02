@@ -14,6 +14,18 @@ const PORT = '3000';
 const io = new Server(server);
 
 
+app.use(bodyparser.json());
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control_Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+    );
+    res.setHeader('Access-Control_Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
+
 app.get('/', (req, res) => {
     res.send('<h1>Hello</h1>')
 });
