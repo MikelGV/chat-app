@@ -6,12 +6,14 @@ import { Server } from "socket.io";
 
 // My imports
 import { db } from "./utils/db";
-
+import {router as authRoutes} from "./routes/auth";
 
 const app = express();
 const server = http.createServer(app)
 const PORT = '3000';
 const io = new Server(server);
+
+app.use('/auth', authRoutes)
 
 
 app.use(bodyparser.json());
