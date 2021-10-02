@@ -9,7 +9,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
     const errors = validationResult(req);
     if (!errors.isEmpty()){
         const error = new Error('Validation failed.');
-        error.status = 422;
+        error.statusCode = 422;
         error.data = errors.array();
         throw error;
     }

@@ -1,4 +1,4 @@
 interface Error {
-    status?: number,
-    data?: Array<{}>
+    statusCode?: number;
+    data?: Array<{}>;
 }

@@ -1,7 +1,7 @@
 // Third party imports
-import express, { NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response, ErrorRequestHandler } from "express";
 import http from "http";
-import bodyparser from "body-parser";
+
 import { Server } from "socket.io";
 
 // My imports
@@ -16,7 +16,7 @@ const io = new Server(server);
 app.use('/auth', authRoutes)
 
 
-app.use(bodyparser.json());
+app.use(express.urlencoded());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control_Allow-Origin', '*');
@@ -28,23 +28,17 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello</h1>')
-});
-
 app.use((error:Error, req:Request, res:Response, next:NextFunction) => {
     console.log(error);
-    const status = error.status || 500;
+    const status = error.statusCode || 500;
     const message = error.message;
     const data = error.data;
     res.status(status).json({message: message, data:data})
 })
 
 db.then(result => {
-    io.on('connection', (socket) => {
-        console.log('a user connected');
-    });
-    server.listen(PORT, () => {
-        console.log('Listenint on *:3000');
-    });
-});
+    server.listen(PORT);
+    io.on('connection', socket => {
+        console.log('connected.')
+    })
+}).catch(err => console.log(err));
