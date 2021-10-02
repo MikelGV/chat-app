@@ -1,5 +1,5 @@
 // Third party imports
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import http from "http";
 import bodyparser from "body-parser";
 import { Server } from "socket.io";
@@ -31,6 +31,14 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('<h1>Hello</h1>')
 });
+
+app.use((error:Error, req:Request, res:Response, next:NextFunction) => {
+    console.log(error);
+    const status = error.status || 500;
+    const message = error.message;
+    const data = error.data;
+    res.status(status).json({message: message, data:data})
+})
 
 db.then(result => {
     io.on('connection', (socket) => {
