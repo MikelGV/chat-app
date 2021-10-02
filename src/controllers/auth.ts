@@ -1,11 +1,11 @@
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import User from "../models/user";
 
-const signup = async (req: Request, res: Response, next: NextFunction) => {
+export const signup = async (req: Request, res: Response, next: NextFunction) => {
     const email = req.body.email;
     const name = req.body.name;
     const password = req.body.password;
