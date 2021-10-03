@@ -8,11 +8,12 @@ import {Error} from "../utils/error"
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()){
-        const error = new Error('Validation failed.');
-        error.statusCode = 422;
-        error.data = errors.array();
-        throw error;
+    if (errors.isEmpty()){
+        return res.status(422).json({
+            method: req.method,
+            status: req.statusCode,
+            error: errors
+        })
     }
     const email = req.body.email;
     const name = req.body.name;
