@@ -30,5 +30,7 @@ router.post('/signup', [
 ],authController.signup
 );
 
+router.post('/login', authController.logIn);
+
 
 export { router };
