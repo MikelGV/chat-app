@@ -8,7 +8,7 @@ import * as authController from "../controllers/auth";
 
 const router = Router();
 
-router.put('/signup', [
+router.post('/signup', [
     body('email').isEmail().withMessage('Please enter a valid email.').custom((value, {req}) => {
         return User.findOne({email:value}).then(userDoc => {
             if (userDoc) {
