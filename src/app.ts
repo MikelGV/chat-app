@@ -15,8 +15,8 @@ const io = new Server(server);
 
 app.use('/auth', authRoutes)
 
-
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control_Allow-Origin', '*');
