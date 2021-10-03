@@ -1,12 +1,12 @@
 // Third party imports
-import express, { NextFunction, Request, Response, ErrorRequestHandler } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import http from "http";
-
 import { Server } from "socket.io";
 
 // My imports
 import { db } from "./utils/db";
 import {router as authRoutes} from "./routes/auth";
+import {Error} from "./utils/error"
 
 const app = express();
 const server = http.createServer(app)
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((error:Error, req:Request, res:Response, next:NextFunction) => {
+app.use((error: Error, req:Request, res:Response, next:NextFunction) => {
     console.log(error);
     const status = error.statusCode || 500;
     const message = error.message;
