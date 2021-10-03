@@ -2,11 +2,13 @@
 import express, { NextFunction, Request, Response } from "express";
 import http from "http";
 import { Server } from "socket.io";
+import mongoose from "mongoose";
 
 // My imports
 import { db } from "./utils/db";
 import {router as authRoutes} from "./routes/auth";
 import {Error} from "./utils/error"
+import { DB_PASS } from "./secret";
 
 const app = express();
 const server = http.createServer(app)
@@ -15,7 +17,6 @@ const io = new Server(server);
 
 app.use('/auth', authRoutes)
 
-app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -36,7 +37,7 @@ app.use((error: Error, req:Request, res:Response, next:NextFunction) => {
     res.status(status).json({message: message, data:data})
 })
 
-db.then(result => {
+mongoose.connect(DB_PASS).then(result => {
     server.listen(PORT);
     io.on('connection', socket => {
         console.log('connected.')
