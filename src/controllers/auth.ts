@@ -9,7 +9,7 @@ import {Error} from "../utils/error"
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()){
-        var error = new Error('Validation failed.');
+        const error = new Error('Validation failed.');
         error.statusCode = 422;
         error.data = errors.array();
         throw error;
