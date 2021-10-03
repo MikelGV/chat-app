@@ -7,7 +7,7 @@ interface UserDocument extends mongoose.Document {
     name: string;
     password: string;
     status: string;
-    chats: ObjectId
+    posts: ObjectId
 };
 
 const userSchema = new Schema({
@@ -29,9 +29,9 @@ const userSchema = new Schema({
         type: String,
         default: "Hey i'm new!"
     },
-    chats: [{
+    posts: [{
         type: Schema.Types.ObjectId,
-        ref: 'Chats'
+        ref: 'Post'
     }]
 });
 
