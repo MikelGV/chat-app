@@ -15,9 +15,11 @@ const server = http.createServer(app)
 const PORT = '3000';
 const io = new Server(server);
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
 app.use('/auth', authRoutes)
 
-app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control_Allow-Origin', '*');
