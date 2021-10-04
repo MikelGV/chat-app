@@ -19,7 +19,8 @@ const io = new Server(server);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-app.use('/auth', authRoutes)
+app.use('/auth', authRoutes);
+app.use('/feed', feedRoutes);
 
 
 app.use((req, res, next) => {
