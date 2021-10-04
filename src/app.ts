@@ -9,6 +9,7 @@ import { db } from "./utils/db";
 import {router as authRoutes} from "./routes/auth";
 import {Error} from "./utils/error"
 import { DB_PASS } from "./secret";
+import {router as feedRoutes} from "./routes/feed";
 
 const app = express();
 const server = http.createServer(app)
