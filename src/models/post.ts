@@ -23,4 +23,6 @@ const postSchema = new Schema({
         type: String,
         required: false
     }
-})
+});
+
+export = mongoose.model<postDocument>('Post', postSchema);
