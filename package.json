@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha src/test/test.ts",
-    "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc --p ."
   },
   "repository": {
