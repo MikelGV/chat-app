@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 // My imports
 import logger from "./utils/logger"
 import { DB_PASS } from "./secret";
+import socket from "./socket";
 
 const port = config.get<number>("port");
 const host = config.get<string>("host");
@@ -30,6 +31,8 @@ app.get('/', (_, res) => res.send("Server is up"))
 mongoose.connect(DB_PASS).then(resutl => {
     httpServer.listen(port, host, () => {
         logger.info("Server is listening");
-        logger.info(`http::/${host}:${port}`)
+        logger.info(`http::/${host}:${port}`);
+
+        socket({io});
     });
 });
