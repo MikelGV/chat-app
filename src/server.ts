@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 
 // My imports
 import logger from "./utils/logger"
-import { DB_PASS } from "./secret";
+import { DB_PASS } from "./utils/secret";
 import socket from "./app";
 const app = express();
 
