@@ -12,7 +12,10 @@ app.get('/', (_, res) => res.send("Server is up"))
 
 // socket.io
 const EVENTS = {
-    connection: 'connection'
+    connection: 'connection',
+    CLIENT: {
+        CREATE_ROOM: "CREATE_ROOM"
+    }
 }
 
 function socket({io}:{io: Server}){
@@ -20,6 +23,10 @@ function socket({io}:{io: Server}){
 
     io.on(EVENTS.connection, (socket: Socket) => {
         logger.info(`User connected ${socket.id}`);
+
+        socket.on(EVENTS.CLIENT.CREATE_ROOM, ({roomName}) => {
+            console.log({roomName})
+        })
     })
 };
 
