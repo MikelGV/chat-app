@@ -25,11 +25,9 @@ const io = new Server(httpServer, {
     },
 });
 
-mongoose.connect(DB_PASS).then(resutl => {
-    httpServer.listen(port, host, () => {
-        logger.info("Server is listening");
-        logger.info(`http::/${host}:${port}`);
+httpServer.listen(port, host, () => {
+    logger.info("Server is listening");
+    logger.info(`http::/${host}:${port}`);
 
-        socket({io});
-    });
+    socket({io});
 });
