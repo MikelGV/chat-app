@@ -2,13 +2,10 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import cors from "cors";
 import config from "config";
-import mongoose from "mongoose";
 
 // My imports
 import logger from "./utils/logger"
-import { DB_PASS } from "./utils/secret";
 import socket from "./app";
 const app = express();
 
