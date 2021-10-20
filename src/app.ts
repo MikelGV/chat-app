@@ -58,9 +58,13 @@ function socket({io}:{io: Server}){
                 time: `${date.getHours()}:${date.getMinutes()}`,
             });
         })
+        
+        socket.on(EVENTS.CLIENT.JOIN_ROOM, (roomId) => {
+            socket.join(roomId);
+
+            socket.emit(EVENTS.SERVER.JOINED_ROOM, roomId)
+        });
     });
-
-
 };
 
 export default socket
